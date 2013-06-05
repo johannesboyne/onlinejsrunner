@@ -1,0 +1,32 @@
+doctype 5
+html
+	head
+		link(href='http://fonts.googleapis.com/css?family=Nunito', rel='stylesheet', type='text/css')
+		style(type="text/css")
+			body {background: #333;}
+			.sidebar{position:absolute;top:0;bottom:0;left:5px;width: 40px;}
+			.btn {
+				display: block;
+				width: 40px;
+				height: 40px;
+				background: #ccc;
+				margin-top: 5px;
+				cursor: pointer;
+				font-family: 'Nunito', sans-serif;
+				text-align: center;
+				line-height: 40px;
+			}
+			.btn:hover {
+				background: #fff;
+			}
+			#e{position:absolute;top:0;right:0;bottom:0;left:50px;}
+		script.
+			!{js}
+	body
+		div(class='sidebar')
+			div(class='btn')
+				span RUN
+		div(id="e")
+		script(src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js", type="text/javascript", charset="utf-8")
+		script.
+			var e=ace.edit("e");e.setTheme("ace/theme/cobalt");e.getSession().setMode("ace/mode/javascript");

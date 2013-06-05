@@ -1,0 +1,10 @@
+{
+  "name": "onlinejsrunner",
+  "version": "0.0.0",
+  "author": "Johannes Boyne <johannes@boyne.de>",
+  "dependencies": {
+    "jade": "~0.31.1",
+    "express": "~3.2.6",
+    "browserify": "~2.17.3"
+  }
+}

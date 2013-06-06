@@ -76,7 +76,8 @@ window.onload = function () {
     document.getElementById('btn').addEventListener('click', _runJS);
 
   window.addEventListener('keydown', function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.keyCode === 74) {
+    // console.log(e.keyCode);
+    if ((e.ctrlKey || e.metaKey) && e.keyCode === 190) {
       e.preventDefault(); e.stopPropagation();
       _runJS();
     }

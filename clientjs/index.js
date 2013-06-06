@@ -32,3 +32,4 @@ function _runJS () {
 }
 
 window.onload = function () { document.getElementById('btn').addEventListener('click', _runJS); };
+window.onload = function () { document.getElementById('btn').addEventListener('touchend', _runJS); };

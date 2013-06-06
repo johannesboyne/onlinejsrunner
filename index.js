@@ -1,10 +1,11 @@
-var express = require('express');
-var app = express();
-var vm = require('vm');
+var express    = require('express');
+var app        = express();
+var vm         = require('vm');
 var browserify = require('browserify');
-var sandbox = {};
+var util       = require('util');
 
-app.configure(function(){
+app.configure(function () {
+  app.use(express.bodyParser());
   app.set('title', 'Online JS Runner');
   app.set('views', __dirname + '/view');
   app.set('view engine', 'jade');
@@ -19,18 +20,34 @@ b.bundle(function (err, src) {
 	clientjssrc = src;
 });
 
-try {
-  vm.runInNewContext('function Base () {}; var b = new Base();', sandbox);
-  console.dir(sandbox);
-} catch (error) {
-  console.log(error);
+function _runInNewVM (jsStr) {
+  try {
+    var sandbox = {};
+    vm.runInNewContext(jsStr, sandbox);
+    console.dir(sandbox);
+    return util.inspect(sandbox);
+  } catch (error) {
+    console.log(error);
+    return util.inspect(error);
+  }
 }
 
 
-app.get('/', function(req, res){
+app.get('/', function (req, res){
   res.render('main', {
   	js: clientjssrc
   });
+});
+
+app.put('/putJS', function (req, res) {
+  var s = '';
+  req.on('data', function (buf) { s += buf.toString(); });
+  req.on('end', function () {
+    console.log(s);
+    // res.send(_runInNewVM(s));
+    res.set('content-type', 'application/json');
+    res.send(JSON.stringify(_runInNewVM(s), null, 4))
+  })
 });
 
 app.listen(3000);

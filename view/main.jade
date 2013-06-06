@@ -1,32 +1,25 @@
 doctype 5
 html
 	head
-		link(href='http://fonts.googleapis.com/css?family=Nunito', rel='stylesheet', type='text/css')
 		style(type="text/css")
 			body {background: #333;}
 			.sidebar{position:absolute;top:0;bottom:0;left:5px;width: 40px;}
-			.btn {
+			#btn {
 				display: block;
-				width: 40px;
-				height: 40px;
-				background: #ccc;
-				margin-top: 5px;
 				cursor: pointer;
-				font-family: 'Nunito', sans-serif;
-				text-align: center;
-				line-height: 40px;
-			}
-			.btn:hover {
-				background: #fff;
+				margin-top: 5px;
 			}
 			#e{position:absolute;top:0;right:0;bottom:0;left:50px;}
 		script.
 			!{js}
 	body
 		div(class='sidebar')
-			div(class='btn', id='runBtn')
-				span RUN
+			svg(version="1.1", id="btn", xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink", x="0px", y="0px", width="40px", height="40px", viewBox="0 0 40 40", enable-background="new 0 0 40 40", xml:space="preserve")
+				g(id="logo")
+					rect(id="background", fill="#F7DF1E", width="40", height="40")
+					path(id="j", d="M10.518,33.427l3.061-1.851c0.591,1.046,1.127,1.931,2.416,1.931c1.236,0,2.014-0.481,2.014-2.361V18.364h3.76v12.833c0,3.895-2.283,5.666-5.612,5.666C13.149,36.863,11.403,35.306,10.518,33.427")
+					path(id="s", d="M23.809,33.025l3.061-1.773c0.806,1.315,1.854,2.283,3.706,2.283c1.557,0,2.551-0.781,2.551-1.854c0-1.289-1.02-1.744-2.739-2.496l-0.939-0.404c-2.71-1.153-4.509-2.604-4.509-5.666c0-2.818,2.148-4.967,5.504-4.967c2.39,0,4.108,0.833,5.342,3.007l-2.927,1.879c-0.645-1.153-1.343-1.609-2.416-1.609c-1.101,0-1.799,0.699-1.799,1.609c0,1.128,0.698,1.586,2.31,2.284l0.939,0.404c3.195,1.368,4.994,2.765,4.994,5.905c0,3.385-2.658,5.236-6.23,5.236C27.167,36.863,24.909,35.199,23.809,33.025")
 		div(id="e")
-		script(src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js", type="text/javascript", charset="utf-8")
+		script(src="/static/src-min-noconflict/ace.js", type="text/javascript", charset="utf-8")
 		script.
-			var e=ace.edit("e");e.setTheme("ace/theme/cobalt");e.getSession().setMode("ace/mode/javascript");
+			var e=ace.edit("e");e.setTheme("ace/theme/chrome");e.getSession().setMode("ace/mode/javascript");

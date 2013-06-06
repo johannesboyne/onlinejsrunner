@@ -6,6 +6,7 @@ var util       = require('util');
 
 app.configure(function () {
   app.use(express.bodyParser());
+  app.use('/static', express.static(__dirname + '/public'));
   app.set('title', 'Online JS Runner');
   app.set('views', __dirname + '/view');
   app.set('view engine', 'jade');

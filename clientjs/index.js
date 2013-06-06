@@ -31,4 +31,4 @@ function _runJS () {
   req.end();
 }
 
-window.onload = function () { document.getElementById('runBtn').addEventListener('click', _runJS); };
+window.onload = function () { document.getElementById('btn').addEventListener('click', _runJS); };

@@ -33,13 +33,13 @@ function _runJS () {
 
 window.onload = function () {
   var welcomeStr = ''
-    + '// Hi, this is your JavaScript Playground.                          \\   \\ \n'
-    + '// Here you can run & test vanilla JS!                               \\ f \\ \n'
-    + '//                                                                    \\ o \\ \n'
-    + '// Just type in your JS code and click on                              \\ r \\ \n'
-    + '// the left [JS] Button to push it to our        (github)               \\ k \\ \n'
-    + '// running Node.js instance. It will run         (comming soon to gh)    \\ m \\ \n'
-    + '// your code insight a VM (Sandboxed)                                     \\ e \\ \n'
+    + '// Hi, this is your JavaScript Playground.                          \\   \\        \n'
+    + '// Here you can run & test vanilla JS!                               \\ f \\       \n'
+    + '//                                                                    \\ o \\      \n'
+    + '// Just type in your JS code and click on                              \\ r \\     \n'
+    + '// the left [JS] Button to push it to our        (github)               \\ k \\    \n'
+    + '// running Node.js instance. It will run         (comming soon to gh)    \\ m \\   \n'
+    + '// your code insight a VM (Sandboxed)                                     \\ e \\  \n'
     + '// <= give it a try!                                                       \\   \\ \n'
     + '// -----------------------------------------------------------------------------\n'
     + '//                                 ````````            `.::::-.\n'
@@ -62,8 +62,23 @@ window.onload = function () {
     + '//                  .sNMMMMMMMMMMMMMNo`        -sNMMMMMMMMMMMMMMMNo`\n'
     + '//                     :oydmNNNmdyo-              ./shdmNNNmdhs+-\n'
     + '\n'
-    + 'var hallo = \'welt\';';
+    + 'function sayHelloWorld (array) {\n'
+    + '    return array.join(\', \');\n'
+    + '}\n\n'
+    + 'var helloworld = [\'world\', \'welt\', \'mundo\', \'världen\'];\n'
+    + 'var out   = sayHelloWorld(helloworld);\n';
+
   e.getSession().setValue(welcomeStr);
-  document.getElementById('btn').addEventListener('click', _runJS);
-  document.getElementById('btn').addEventListener('touchend', _runJS);
+  
+  if ('ontouchstart' in document.documentElement)
+    document.getElementById('btn').addEventListener('touchend', _runJS);
+  else
+    document.getElementById('btn').addEventListener('click', _runJS);
+
+  window.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.keyCode === 74) {
+      e.preventDefault(); e.stopPropagation();
+      _runJS();
+    }
+  });
 };

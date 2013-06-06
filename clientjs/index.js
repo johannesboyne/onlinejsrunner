@@ -17,7 +17,7 @@ function _runJS () {
       // console.log('BODY: ');
       // console.log(JSON.parse(s));
       var oldJs = window.e.getSession().getValue();
-      var newJs = oldJs + '\n\n// OUTPUT\n//------\n/*' + JSON.parse(s).toString() + '*/';
+      var newJs = oldJs + '\n\n// OUTPUT\n// ------\n/*' + JSON.parse(s).toString() + '*/';
       e.getSession().setValue(newJs);
     });
   });
@@ -31,7 +31,39 @@ function _runJS () {
   req.end();
 }
 
-window.onload = function () { 
+window.onload = function () {
+  var welcomeStr = ''
+    + '// Hi, this is your JavaScript Playground.                          \\   \\ \n'
+    + '// Here you can run & test vanilla JS!                               \\ f \\ \n'
+    + '//                                                                    \\ o \\ \n'
+    + '// Just type in your JS code and click on                              \\ r \\ \n'
+    + '// the left [JS] Button to push it to our        (github)               \\ k \\ \n'
+    + '// running Node.js instance. It will run         (comming soon to gh)    \\ m \\ \n'
+    + '// your code insight a VM (Sandboxed)                                     \\ e \\ \n'
+    + '// <= give it a try!                                                       \\   \\ \n'
+    + '// -----------------------------------------------------------------------------\n'
+    + '//                                 ````````            `.::::-.\n'
+    + '//                               MMMMMMM+         /ymMMMMMMMMMms:\n'
+    + '//                               MMMMMMM+       +NMMMMMMMMMMMMMMMd:\n'
+    + '//                               MMMMMMM+      sMMMMMMMMNNNMMMMMMMN:\n'
+    + '//                               MMMMMMM+     :MMMMMMMo`   .oNMNy/`\n'
+    + '//                               MMMMMMM+     oMMMMMMd       .:\n'
+    + '//                               MMMMMMM+     /MMMMMMMo`\n'
+    + '//                               MMMMMMM+      dMMMMMMMMho:`\n'
+    + '//                               MMMMMMM+      `hMMMMMMMMMMMmy/.\n'
+    + '//                               MMMMMMM+        :hMMMMMMMMMMMMMmo`\n'
+    + '//                               MMMMMMM+          `/ymMMMMMMMMMMMMs`\n'
+    + '//                               MMMMMMM+              `:ohNMMMMMMMMd`\n'
+    + '//                               MMMMMMM+                   :yMMMMMMMs\n'
+    + '//                      .        MMMMMMM/       `//           yMMMMMMd\n'
+    + '//                  `/yNM+      :MMMMMMM-    .+dMMMh-        `dMMMMMMh\n'
+    + '//                -dMMMMMMmo//+yMMMMMMMd    :MMMMMMMMmy+///oyNMMMMMMM:\n'
+    + '//                 oMMMMMMMMMMMMMMMMMMm.     .hMMMMMMMMMMMMMMMMMMMMN/\n'
+    + '//                  .sNMMMMMMMMMMMMMNo`        -sNMMMMMMMMMMMMMMMNo`\n'
+    + '//                     :oydmNNNmdyo-              ./shdmNNNmdhs+-\n'
+    + '\n'
+    + 'var hallo = \'welt\';';
+  e.getSession().setValue(welcomeStr);
   document.getElementById('btn').addEventListener('click', _runJS);
   document.getElementById('btn').addEventListener('touchend', _runJS);
 };

@@ -1,11 +1,17 @@
 {
   "name": "onlinejsrunner",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Johannes Boyne <johannes@boyne.de>",
   "dependencies": {
     "jade": "~0.31.1",
     "express": "~3.2.6",
-    "browserify": "~2.17.3",
-    "hyperquest": "~0.1.6"
+    "browserify": "~2.17.3"
+  },
+  "subdomain": "onlinejsrunner",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "0.8.x"
   }
 }

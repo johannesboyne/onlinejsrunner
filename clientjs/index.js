@@ -8,6 +8,7 @@ var options = {
 };
 
 function runJS () {
+  document.getElementById('background').style.fill = '#ff0000';
   var req = http.request(options, function (res) {
     var s = '';
     res.on('data', function (chunk) {
@@ -18,6 +19,7 @@ function runJS () {
       var newJs = oldJs + '\n\n// OUTPUT\n// ------\n/*' + JSON.parse(s).toString() + '*/';
       e.getSession().setValue(newJs);
       aceEditorJumpDown();
+      document.getElementById('background').style.fill = '#F7DF1E';
     });
   });
 

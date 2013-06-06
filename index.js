@@ -4,6 +4,7 @@ var vm         = require('vm');
 var browserify = require('browserify');
 var util       = require('util');
 
+// configure expressjs
 app.configure(function () {
   app.use(express.bodyParser());
   app.use('/static', express.static(__dirname + '/public'));
@@ -13,42 +14,44 @@ app.configure(function () {
   app.engine('jade', require('jade').__express);
 });
 
+// bundle clientside js
 var clientjssrc = '';
 var b = browserify();
 b.add(__dirname + '/clientjs/index.js');
 b.bundle(function (err, src) {
-	// console.log(src);
 	clientjssrc = src;
 });
 
-function _runInNewVM (jsStr) {
+// the little VM runner
+function runInNewVM (jsStr) {
   try {
     var sandbox = {};
     vm.runInNewContext(jsStr, sandbox);
-    console.dir(sandbox);
+    // console.dir(sandbox);
     return util.inspect(sandbox);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return util.inspect(error);
   }
 }
 
-
+// index (main) route /
 app.get('/', function (req, res){
   res.render('main', {
   	js: clientjssrc
   });
 });
 
+// receiving the JavaScript
 app.put('/putJS', function (req, res) {
   var s = '';
   req.on('data', function (buf) { s += buf.toString(); });
   req.on('end', function () {
-    console.log(s);
-    // res.send(_runInNewVM(s));
     res.set('content-type', 'application/json');
-    res.send(JSON.stringify(_runInNewVM(s), null, 4))
+    res.send(JSON.stringify(runInNewVM(s), null, 4))
   })
 });
 
+// fireup http server
 app.listen(process.env.PORT || 80);
+console.log('OnlineJSRunner listens on port: %d', process.env.PORT || 80);

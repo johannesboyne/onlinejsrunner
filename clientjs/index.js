@@ -68,8 +68,9 @@ function showSupport () {
     + '//:: \n'
     + '//:: Future Steps                                \n'
     + '//:: ----------                                  \n'
-    + '//:: 1.) save and share javascripts              \n'
-    + '//:: 2.) ??? \n'
+    + '//:: 1.) realtime, collaborational editing       \n'
+    + '//:: 2.) save and share javascripts              \n'
+    + '//:: 3.) ??? \n'
     + '//:: ---------------------------------------------------------------------------\n';
   var newJs = supportStr + oldJs;
   e.getSession().setValue(newJs);
@@ -94,9 +95,9 @@ window.onload = function () {
     + '//:: your code insight a VM (Sandboxed)                                   \\ e \\  \n'
     + '//::                                                                       \\   \\ \n'
     + '//:: <= give it a try and press [JS] or do cmd + . (ctrl + .)                      \n'
-    + '//:: © '+new Date().getFullYear()+' Johannes Boyne; github.com/johannesboyne; about.me/johannesboyne\n'
+    + '//:: © '+new Date().getFullYear()+' Johannes Boyne; github.com/johannesboyne;      \n'
     + '//:: ---------------------------------------------------------------------------\n'
-    + '//::                                 ````````            `.::::-.\n'
+    + '//:: \n'
     + '//::                               MMMMMMM+         /ymMMMMMMMMMms:\n'
     + '//::                               MMMMMMM+       +NMMMMMMMMMMMMMMMd:\n'
     + '//::                               MMMMMMM+      sMMMMMMMMNNNMMMMMMMN:\n'

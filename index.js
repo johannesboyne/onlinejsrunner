@@ -36,9 +36,19 @@ function runInNewVM (jsStr) {
 }
 
 // index (main) route /
-app.get('/', function (req, res){
+app.get('/', function (req, res) {
+  var jsid = '', i;
+  for (i = 0; i < 8; i++) {
+    jsid += Math.floor(Math.random() * 16).toString(16);
+  }
+  // this is a first approach for the realtime communication
+  // jsid is used to identify a "js file/room/hangout"
+  res.redirect('/js/'+jsid);
+});
+
+app.get('/js/:jsid', function (req, res) {
   res.render('main', {
-  	js: clientjssrc
+    js: clientjssrc
   });
 });
 

@@ -1,22 +1,32 @@
 var http = require('http');
 
-var options = {
+var optionsRun = {
   hostname: window.location.host,
   port: window.location.port,
   path: '/putJS',
   method: 'put'
 };
 
+var optionsSave = {
+  hostname: window.location.host,
+  port: window.location.port,
+  path: '/saveJS',
+  method: 'put'
+};
+
+// Send JS to the Node.js instance and let it run
 function runJS () {
   document.getElementById('background').style.fill = '#ff0000';
-  var req = http.request(options, function (res) {
+  var req = http.request(optionsRun, function (res) {
     var s = '';
     res.on('data', function (chunk) {
       s += chunk.toString();
     });
     res.on('end', function () {
       var oldJs = window.e.getSession().getValue();
-      var newJs = oldJs + '\n\n// OUTPUT\n// ------\n/*' + JSON.parse(s).toString() + '*/';
+      var t_new = '\n\n// [OUTPUT]\n// --------\n/*' + JSON.parse(s).toString() + '*/';
+      var newJs = oldJs + t_new;
+      console.log(t_new);
       e.getSession().setValue(newJs);
       aceEditorJumpDown();
       document.getElementById('background').style.fill = '#F7DF1E';
@@ -32,6 +42,29 @@ function runJS () {
   req.end();
 }
 
+// Save JS 
+function saveJS () {
+  document.getElementById('save').style.fill = '#ff0000';
+  var req = http.request(optionsSave, function (res) {
+    res.on('end', function () {
+      aceEditorJumpDown();
+      document.getElementById('save').style.fill = '#F7DF1E';
+    });
+  });
+
+  req.on('error', function(e) {
+    alert('problem with request: ' + e.message);
+  });
+
+  var saveObj = {
+    id: window.location.pathname.split('/').join(':').substr(1),
+    js: window.e.getSession().getValue()
+  };
+  req.write(JSON.stringify(saveObj));
+  req.end();
+}
+
+// check keydown user interaction
 function onKeyDown (e) {
   if ((e.ctrlKey || e.metaKey) && e.keyCode === 190) {
     e.preventDefault(); e.stopPropagation();
@@ -42,10 +75,20 @@ function onKeyDown (e) {
   }
 }
 
+// tell ace to jump down
+function aceEditorJumpDown () {
+  window.e.focus();
+  var n = window.e.getSession().getValue().split("\n").length; // To count total no. of lines
+  window.e.gotoLine(n);
+}
+
+// remove own comments:
+// //:: comment
 function removeOwnComments (str) {
   return str.replace(/\/\/::.*\n/g, '');
 }
 
+// Show support comments
 function showSupport () {
   var oldJs = removeOwnComments(e.getSession().getValue());
   var supportStr = ''
@@ -76,14 +119,7 @@ function showSupport () {
   e.getSession().setValue(newJs);
 }
 
-function aceEditorJumpDown () {
-  window.e.focus();
-  var n = window.e.getSession().getValue().split("\n").length; // To count total no. of lines
-  window.e.gotoLine(n);
-}
-
-// window.e.getSession().setValue(window.e.getSession().getValue().replace(/\/\/.*/g, ''))
-
+// on window load, show welcome message + JS
 window.onload = function () {
   var welcomeStr = ''
     + '//:: Hi, this is your JavaScript Playground.                        \\   \\        \n'
@@ -116,15 +152,22 @@ window.onload = function () {
     + '//::                 oMMMMMMMMMMMMMMMMMMm.     .hMMMMMMMMMMMMMMMMMMMMN/\n'
     + '//::                  .sNMMMMMMMMMMMMMNo`        -sNMMMMMMMMMMMMMMMNo`\n'
     + '//::                     :oydmNNNmdyo-              ./shdmNNNmdhs+-\n'
-    + '\n'
+    + '\n';
+  if (window.savedJs.length === 0) {
+    welcomeStr +=  ''
     + 'function sayHelloWorld (array) {\n'
     + '    return array.join(\', \');\n'
     + '}\n\n'
     + 'var helloworld = [\'world\', \'welt\', \'mundo\', \'världen\'];\n'
     + 'var out   = sayHelloWorld(helloworld);\n';
-
+  } else {
+    welcomeStr += window.savedJs;
+  }
+  
   e.getSession().setValue(welcomeStr);
   
+  // addEventListeners
+
   var clickType = 'click';
   if ('ontouchstart' in document.documentElement)
     clickType = 'touchend';
@@ -132,5 +175,6 @@ window.onload = function () {
   document.getElementById('btn').addEventListener(clickType, runJS);
   document.getElementById('btn').addEventListener(clickType, runJS);
   document.getElementById('support').addEventListener(clickType, showSupport);
+  // document.getElementById('save').addEventListener(clickType, saveJS);
   window.addEventListener('keydown', onKeyDown);
 };

@@ -1,6 +1,6 @@
 # Online JS Runner
 
-(onlinejsrunner.nodejitsu.com)[onlinejsrunner.nodejitsu.com]
+[onlinejsrunner.nodejitsu.com](http://onlinejsrunner.nodejitsu.com)
 
 Why doing an online JS runner?
 

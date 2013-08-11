@@ -1,6 +1,6 @@
 {
   "name": "onlinejsrunner",
-  "version": "0.0.5",
+  "version": "0.0.5-1",
   "author": "Johannes Boyne <johannes@boyne.de>",
   "dependencies": {
     "jade": "~0.31.1",

@@ -128,7 +128,7 @@ window.onload = function () {
     + '//:: Just type in your JS code and click on                            \\ r \\     \n'
     + '//:: the left [JS] Button to push it to our      (github:)              \\ k \\    \n'
     + '//:: running Node.js instance. It will run       (goo.gl/6voI3)          \\ m \\   \n'
-    + '//:: your code insight a VM (Sandboxed)                                   \\ e \\  \n'
+    + '//:: your code inside of a VM (Sandboxed)                                 \\ e \\  \n'
     + '//::                                                                       \\   \\ \n'
     + '//:: <= give it a try and press [JS] or do cmd + . (ctrl + .)                      \n'
     + '//:: © '+new Date().getFullYear()+' Johannes Boyne; github.com/johannesboyne;      \n'
